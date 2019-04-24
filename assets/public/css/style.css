@@ -1,0 +1,80 @@
+/*
+*
+* General
+*
+ */
+
+.generalCont{
+    min-height: 80vh;
+}
+
+.defaultTopMargin{
+    margin-top: 10vh;
+}
+
+.has-success{
+    border: 2px solid #2d9925;
+}
+
+.has-error{
+    border: 2px solid #990000;
+}
+
+
+/*
+*
+*   Navigation bar and logo
+*
+ */
+
+.bg-navBar{
+    background-color: rgba(224, 72, 122, 0.51) !important
+}
+
+.brand-wrap .logo, .navbar-brand .logo {
+    margin-right: 7px;
+    max-height: 60px;
+    display: inline-block;
+}
+
+/*
+*
+*Principal slide
+*
+ */
+
+.bgImage{
+    background-image: url(../images/derandi/silde.jpg);
+    background-size: cover;
+}
+
+/*
+*
+* Buttons
+*
+ */
+
+.btn-primary {
+    color: #fff;
+    background-color: #ff90c0;
+    border-color: #ff87bc;
+}
+
+.btn-primary:hover {
+    color: #fff;
+    background-color: #d97ca7;
+    border-color: #cc70af;
+}
+
+
+/*
+*
+*
+* Footer
+*
+ */
+
+
+.footerColor{
+    background-color: rgba(224, 72, 122, 0.51) !important
+}
