@@ -59,6 +59,7 @@ if(isset($_GET['message']) && $_GET['message'] == 'editProdFail'){ ?>
                 <div class="col-lg-2 form-group">
                     <label>Producto público</label>
                     <select name="selling" class="form-control">
+                        <option value="<?= $product[0]->selling ?>" ><?php if($product[0]->selling) echo 'Sí'; else echo 'No' ?> </option>
                         <option value="0">No</option>
                         <option value="1">Sí</option>
                     </select>
@@ -117,7 +118,7 @@ if(isset($_GET['message']) && $_GET['message'] == 'editProdFail'){ ?>
 
 
                     <div class="column">
-                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                        <table class="table table-responsive is-bordered is-striped is-narrow is-hoverable is-fullwidth">
                             <thead>
                             <tr>
                                 <th>Nombre</th>
@@ -131,7 +132,7 @@ if(isset($_GET['message']) && $_GET['message'] == 'editProdFail'){ ?>
                                 <tr>
 
                                     <td><?= $p->variation ?></td>
-                                    <td><?php if($auth_level==9){ ?><a href="<?php echo site_url('product/productVariation?productVariation='.$p->variation_id) ?>" class="btn btn-primary">Administrar variante</a><?php } ?></td>
+                                    <td><?php if($auth_level==9){ ?><a href="<?php echo site_url('product/productVariation?productVariation='.$p->variation_id.'&product='.$_GET['product']) ?>" class="btn btn-primary">Administrar variante</a><?php } ?></td>
                                 </tr>
                             <?php endforeach; ?>
                             <tr>

@@ -121,7 +121,7 @@ if(isset($_GET['message']) && $_GET['message'] == 'moveStockSuccess'){ ?>
 
 
                     <div class="column">
-                        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+                        <table class="table table-responsive is-bordered is-striped is-narrow is-hoverable is-fullwidth">
                             <thead>
                             <tr>
                                 <th>Nombre</th>

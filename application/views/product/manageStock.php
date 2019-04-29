@@ -16,8 +16,9 @@
 <?php } ?>
 
 <h3 class="title is-3">Stock -  <?= $movement[0]->warehouse ?> -  <?= $movement[0]->product ?> -  <?= $movement[0]->variant ?></h3>
+<a href="<?php echo site_url('product/detail?product='.$_GET['product']) ?>" class="btn btn-primary">Regresar a producto</a>
 <div class="column">
-    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+    <table class="table table-responsive is-bordered is-striped is-narrow is-hoverable is-fullwidth">
         <thead>
         <tr>
 

@@ -18,6 +18,7 @@ class Product extends MY_Controller{
         // Form and URL helpers always loaded (just for convenience)
         $this->load->helper('url');
         $this->load->helper('form');
+        $this->load->model('dashboard_model');
         $this->load->model('product_model');
         parse_str($_SERVER['QUERY_STRING'], $_GET);
         $this->is_logged_in();
@@ -53,6 +54,8 @@ class Product extends MY_Controller{
             }else{
                 $data["product"] = $this->product_model->getProducts( $config["per_page"],  $page );
             }
+
+            $data['user'] = $this->dashboard_model->getUsers(1,0,$this->auth_username);
 
 
             $this->load->view('templates/dashboard/header');
@@ -236,7 +239,7 @@ class Product extends MY_Controller{
 
                     $picture['product_variation_id'] = $id;
                     $this->product_model->addProductVariationPic($picture);
-                    redirect('product/productVariation?productVariation='.$id);
+                    redirect('product/productVariation?productVariation='.$id.'&product='.$_GET['product']);
                 }
 
 
@@ -256,7 +259,7 @@ class Product extends MY_Controller{
     public function deleteVariationPicture(){
         if($this->require_min_level(9)) {
             $this->product_model->deleteProductVariationPicture($_GET['productVariationPicture']);
-            redirect('product/productVariation?productVariation='.$_GET['productVariation']);
+            redirect('product/productVariation?productVariation='.$_GET['productVariation'].'&product='.$_GET['product']);
         }
     }
 

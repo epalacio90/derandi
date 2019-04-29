@@ -66,19 +66,35 @@
 
     <ul class="sidebar navbar-nav">
         <li class="nav-item active">
-            <a class="nav-link" href="index.html">
+            <a class="nav-link" href="<?php echo site_url('dashboard') ?>">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Panel</span>
             </a>
         </li>
+        <?php if($auth_level > 3){ ?>
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-fw fa-table"></i>
+                <span>Productos</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                <h6 class="dropdown-header">General:</h6>
+                <a class="dropdown-item" href="<?php echo site_url('product') ?>">Productos</a>
+                <a class="dropdown-item" href="<?php echo site_url('warehouse') ?>">Almacenes</a>
+                <div class="dropdown-divider"></div>
+                <?php if($auth_level == 9){ ?>
+                <h6 class="dropdown-header">Administración:</h6>
+                <a class="dropdown-item" href="<?php echo site_url('product/brand') ?>">Marcas</a>
+                <a class="dropdown-item" href="<?php echo site_url('product/addProduct') ?>">Agregar producto</a>
+                <?php } ?>
+            </div>
+        </li>
+
+        <?php } ?>
+
 
         <li class="nav-item">
-            <a class="nav-link" href="tables.html">
-                <i class="fas fa-fw fa-table"></i>
-                <span>Productos</span></a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="tables.html">
+            <a class="nav-link" href="<?php echo site_url() ?>">
                 <i class="fas fa-fw fa-arrow-left"></i>
                 <span>Ir a página</span></a>
 

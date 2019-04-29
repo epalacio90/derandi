@@ -274,6 +274,12 @@ class Product_Model extends MY_Model
         return $query->result();
     }
 
+    /**
+     * @param int $product_variant
+     * @param int $warehouse
+     * @return mixed array
+     */
+
     public function countMovementTotal($product_variant = false, $warehouse = false){
         if($product_variant != false && $warehouse != false){
             //search by warehouse and variant

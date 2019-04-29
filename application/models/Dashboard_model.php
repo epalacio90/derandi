@@ -64,6 +64,29 @@ class Dashboard_model extends MY_Model
     }
 
     /**
+     * Get all users
+     *
+     * @param int $limit
+     * @param int $start
+     * @param string $username
+     *
+     * @return array
+     */
+
+
+
+    public function getUsers($limit = 1, $start = 0, $username=false){
+        if(!$username ){
+            $query = $this->db->query('Select * from users  limit '.$start.  ', ' . $limit);
+        }else{
+                $query = $this->db->query('Select * from users WHERE username ="'.$username.'"  limit '.$start.  ', ' . $limit  );
+
+        }
+
+        return $query->result();
+    }
+
+    /**
      * Get all the transactions
      *
      *@return array

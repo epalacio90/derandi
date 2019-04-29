@@ -20,6 +20,23 @@
     border: 2px solid #990000;
 }
 
+.links strong{
+
+    padding: 5px;
+    background-color: #ff90c0;
+    border: solid 1px #ff5fe3;
+    border-radius: 5%;
+}
+
+.links a{
+
+    padding: 5px;
+    color: #fff;
+    background-color: #ff90c0;
+    border: solid 1px #ff5fe3;
+    border-radius: 5%;
+}
+
 
 /*
 *

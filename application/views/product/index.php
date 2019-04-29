@@ -54,7 +54,7 @@
                         echo 'Privado';
                     }?></td>
             <?php }else{  ?>
-                <?php if($p->discount*$p->public_price/100 < $p->min_price) echo $p->min_price; else $p->public_price  ?>
+               <td> <?php if((100-$user[0]->discount)*$p->public_price/100 < $p->min_price) echo $p->min_price; else echo (100-$user[0]->discount)*$p->public_price/100  ?></td>
             <?php } ?>
             <td><?= $p->quantity ?></td>
 
@@ -63,7 +63,7 @@
         <?php endforeach; ?>
         </tbody>
     </table>
-    <p><?php echo $links; ?></p>
+    <p class="links"><?php echo $links; ?></p>
 </div>
 <?php if($auth_level == 9){ ?>
     <a class="btn btn-primary" href="<?php echo site_url('product/addProduct') ?>">Agregar producto</a>

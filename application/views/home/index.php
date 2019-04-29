@@ -137,121 +137,21 @@
         </header><!-- sect-heading -->
         <div class="row">
             <div class="owl-carousel owl-init slide-items owl-loaded owl-drag" data-items="5" data-margin="20" data-dots="true" data-nav="true">
-                <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-1270px, 0px, 0px); transition: 0s; width: 4064px;"><div class="owl-item cloned" style="width: 234px; margin-right: 20px;"><div class="item-slide">
+                <div class="owl-stage-outer"><div class="owl-stage" style="transform: translate3d(-1270px, 0px, 0px); transition: 0s; width: 4064px;">
+                        <?php foreach ($product as $p){ ?>
+                        <div class="owl-item cloned" style="width: 234px; margin-right: 20px;">
+                            <div class="item-slide">
                                 <figure class="card card-product">
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa2.jpg')?>"> </div>
+                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/product/'.$p->path)?>"> </div>
                                     <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">Second item name</a></h6>
+                                        <h6 class="title text-truncate"><a href="<?php echo site_url('shop/product?product='.$p->id.'&productVariation='.$p->var_id) ?>"><?= $p->name ?></a></h6>
                                     </figcaption>
                                 </figure> <!-- card // -->
-                            </div></div><div class="owl-item cloned" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa3.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">Third item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div><div class="owl-item cloned" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa4.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">Good item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div><div class="owl-item cloned" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa5.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">Another item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div><div class="owl-item cloned" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa3.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">Third item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div><div class="owl-item active" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <span class="badge-new"> NEW </span>
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa1.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">First item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div><div class="owl-item active" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa2.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">Second item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div><div class="owl-item active" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa3.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">Third item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div><div class="owl-item active" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa4.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">Good item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div><div class="owl-item active" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa5.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">Another item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div><div class="owl-item" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa3.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">Third item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div><div class="owl-item cloned" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <span class="badge-new"> NEW </span>
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa1.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">First item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div><div class="owl-item cloned" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa2.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">Second item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div><div class="owl-item cloned" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa3.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">Third item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div><div class="owl-item cloned" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa4.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">Good item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div><div class="owl-item cloned" style="width: 234px; margin-right: 20px;"><div class="item-slide">
-                                <figure class="card card-product">
-                                    <div class="img-wrap"> <img src="<?php echo base_url('assets/images/products/blusa5.jpg')?>"> </div>
-                                    <figcaption class="info-wrap text-center">
-                                        <h6 class="title text-truncate"><a href="#">Another item name</a></h6>
-                                    </figcaption>
-                                </figure> <!-- card // -->
-                            </div></div></div></div>
+                            </div>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
             </div>
         </div>
         <!-- ========================= Product Carrousel End// ========================= -->

@@ -13,11 +13,11 @@
 
 <!-- Include the Quill library -->
 <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-<?php echo 'Form Error : ' . validation_errors();
-?>
-<h3 class="title is-3">Variacion <?= $product[0]->variation ?> del producto <?= $product[0]->name ?></h3>
+
+<h3 class="title is-3">Variación <?= $product[0]->variation ?> del producto <?= $product[0]->name ?></h3>
+<a href="<?php echo site_url('product/editProduct?product='.$_GET['product']) ?> " class="btn btn-primary">Regresar al producto</a>
 <div class="column">
-    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+    <table class="table table-responsive is-bordered is-striped is-narrow is-hoverable is-fullwidth">
         <thead>
         <tr>
 
@@ -38,7 +38,7 @@
             <?php } ?>
         <?php endforeach; ?>
         <tr>
-            <?php echo form_open_multipart('product/productVariation?productVariation='.$_GET['productVariation']  , 'id=myForm') ?>
+            <?php echo form_open_multipart('product/productVariation?productVariation='.$_GET['productVariation'] .'&product='.$_GET['product'] , 'id=myForm') ?>
 
 
             <td><input class="form-control" type="file" name="userfile"></td>
@@ -89,7 +89,7 @@
     }
 
     function changeLink(id){
-        document.getElementById("deleteLink").href= "<?php echo site_url('product/deleteVariationPicture?productVariation='.$_GET['productVariation'].'&productVariationPicture=') ?>" + id;
+        document.getElementById("deleteLink").href= "<?php echo site_url('product/deleteVariationPicture?productVariation='.$_GET['productVariation'].'&product='.$_GET['product'].'&productVariationPicture=') ?>" + id;
         $('#deleteBrandModal').modal('show');
 
     }

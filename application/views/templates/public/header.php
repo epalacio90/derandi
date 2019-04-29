@@ -49,7 +49,7 @@ vendortrap4 files-->
 <!-- custom style -->
 <link href="<?php echo base_url('assets/public/css/ui.css')?>" rel="stylesheet" type="text/css"/>
 <link href="<?php echo base_url('assets/public/css/responsive.css')?>" rel="stylesheet" media="only screen and (max-width: 1200px)" />
-    <link href="<?php echo base_url('assets/public/css/style.css?v=2')?>" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo base_url('assets/public/css/style.css?v=4')?>" rel="stylesheet" type="text/css"/>
 
 <!-- custom javascript -->
 <script src="<?php echo base_url('assets/public/js/script.js')?>" type="text/javascript"></script>

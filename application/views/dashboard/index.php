@@ -17,7 +17,7 @@
 
 <h3 class="title is-3">Transacciones</h3>
 <div class="column">
-    <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+    <table class="table table-responsive is-bordered is-striped is-narrow is-hoverable is-fullwidth">
         <thead>
         <tr>
             <th>Acciones</th>
