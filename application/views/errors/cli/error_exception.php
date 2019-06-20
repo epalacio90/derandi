@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-An uncaught Exception was encountered
+Una excepción no controlada ocurrió
 
 Type:        <?php echo get_class($exception), "\n"; ?>
 Message:     <?php echo $message, "\n"; ?>

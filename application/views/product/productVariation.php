@@ -33,7 +33,13 @@
             <tr>
 
                 <td><img src="<?php echo base_url('assets/images/product/'). $p->path ?>" style="max-width: 200px"></td>
-                <td><button onclick="changeLink(<?= $p->pic_id ?>)" class="btn btn-danger">Borrar</button></td>
+                <td><a href="<?php echo site_url('product/setImageAsPrincipal?productVariation='.$_GET['productVariation'].'&product='.$_GET['product'].'&productVariationPicture='.$p->pic_id) ?>" class="btn <?php
+                    if($p->principal){
+                        echo 'btn-success';
+                    }else{
+                       echo 'btn-danger';
+                    }
+                    ?>">Imagen Principal</a> <button onclick="changeLink(<?= $p->pic_id ?>)" class="btn btn-danger">Borrar</button></td>
             </tr>
             <?php } ?>
         <?php endforeach; ?>

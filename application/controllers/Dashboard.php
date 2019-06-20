@@ -19,6 +19,7 @@ class Dashboard extends MY_Controller
         $this->load->helper('url');
         $this->load->helper('form');
         $this->load->model('dashboard_model');
+        $this->load->model('warehouse_model');
         parse_str($_SERVER['QUERY_STRING'], $_GET);
         $this->is_logged_in();
     }
@@ -194,15 +195,26 @@ class Dashboard extends MY_Controller
         if($this->require_min_level(1)) {
             $transaction = $_GET['transaction'];
             if($this->auth_level == 9){
-                $data['transaction'] = $this->dashboard_detail->getTransaction($transaction);
-                $data['transaction_details'] = $this->dashboard_detail->getTransactionDetail($transaction);
+                $data['transaction'] = $this->dashboard_model->getTransaction($transaction);
+                $data['transaction_detail'] = $this->dashboard_model->getTransactionDetail($transaction);
+                $data['warehouse']=$this->warehouse_model->getAllWarehouse();
             }else{
-                $data['transaction'] = $this->dashboard_detail->getTransaction($transaction, $this->auth_username);
-                $data['transaction_details'] = $this->dashboard_detail->getTransactionDetail($transaction, $this->auth_username);
+                $data['transaction'] = $this->dashboard_model->getTransaction($transaction, $this->auth_username);
+                $data['transaction_detail'] = $this->dashboard_model->getTransactionDetail($transaction, $this->auth_username);
             }
-            $this->load->view('templates/public/header', $data);
+            $this->load->view('templates/dashboard/header', $data);
             $this->load->view('dashboard/transaction', $data);
-            $this->load->view('templates/public/footer', $data);
+            $this->load->view('templates/dashboard/footer', $data);
+        }
+    }
+
+    public function sendTransaction(){
+        if($this->require_min_level(9)) {
+            $data['warehouse_id'] = $this->input->post('warehouse');
+            $data['sent'] = 1;
+            $this->dashboard_model->updateTransaction($this->input->post('transaction_id'), $data);
+            redirect('dashboard/transaction?transaction='.$this->input->post('transaction_id'));
+
         }
     }
 

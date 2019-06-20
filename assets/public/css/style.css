@@ -4,6 +4,14 @@
 *
  */
 
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.europa{
+    font-family: 'Montserrat', sans-serif;
+}
+
 .generalCont{
     min-height: 80vh;
 }
@@ -37,6 +45,37 @@
     border-radius: 5%;
 }
 
+.centerY{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.pagination {
+    display: inline-block;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+.pagination strong {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    background-color: #ff90c0;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+}
+
+
 
 /*
 *
@@ -60,8 +99,24 @@
 *
  */
 
-.bgImage{
-    background-image: url(../images/derandi/silde.jpg);
+.bgImage0{
+    background-image: url(../../images/principalCarrousel/163.jpg);
+    background-size: cover;
+}
+.bgImage1{
+    background-image: url(../../images/principalCarrousel/170.jpg);
+    background-size: cover;
+}
+.bgImage2{
+    background-image: url(../../images/principalCarrousel/173.jpg);
+    background-size: cover;
+}
+.bgImage3{
+    background-image: url(../../images/principalCarrousel/183.jpg);
+    background-size: cover;
+}
+.bgImage4{
+    background-image: url(../../images/principalCarrousel/192.jpg);
     background-size: cover;
 }
 

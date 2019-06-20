@@ -20,27 +20,50 @@ class Shop_model extends MY_Model
      *
      * @return mixed
      */
-    public function getProductList($limit, $start=0, $search=false){
+    public function getProductList($limit, $start=0, $search=false, $filter = false){
 
         if(!$search) {
-            $query = $this->db->query('Select  prod.name, prod.id, min(pic.path) as path, prod.public_price, prod.discount, prod.min_price, var.id as var_id
-            from product as prod left join product_variation as var on var.product_id = prod.id 
-            left join product_variation_pictures as pic on var.id = pic.product_variation_id
-            where prod.selling = true
-            group by prod.id
-            order by prod.id desc limit ' . $start . ' , ' . $limit);
-        }else{
+            if(!$filter){
+                $query = $this->db->query('Select  prod.name, prod.id, max(pic.path) as path, prod.public_price, prod.discount, prod.min_price, var.id as var_id
+                from product as prod left join product_variation as var on var.product_id = prod.id 
+                left join product_variation_pictures as pic on var.id = pic.product_variation_id
+                where prod.selling = true and pic.principal
+                group by prod.id 
+                order by prod.id desc limit ' . $start . ' , ' . $limit);
+            }else{
+                $query = $this->db->query('Select  prod.name, prod.id, max(pic.path) as path, prod.public_price, prod.discount, prod.min_price, var.id as var_id
+                from product as prod left join product_variation as var on var.product_id = prod.id 
+                left join product_variation_pictures as pic on var.id = pic.product_variation_id
+                where prod.selling = true and pic.principal and prod.brand = '. $filter . '
+                group by prod.id 
+                order by prod.id desc limit ' . $start . ' , ' . $limit);
+            }
 
-            $query = $this->db->query('Select  prod.name, prod.id, min(pic.path) as path, prod.public_price, prod.discount, prod.min_price, var.id as var_id
-            from product as prod left join product_variation as var on var.product_id = prod.id 
-            left join product_variation_pictures as pic on var.id = pic.product_variation_id
-            where prod.selling = true AND ( 
-            prod.sku like "%' . $search . '%" OR
-            prod.name like "%' . $search . '%" OR
-            prod.description like "%'.$search.'%"
-            )
-            group by prod.id
-            order by prod.id desc limit ' . $start . ' , ' . $limit);
+        }else{
+            if(!$filter) {
+                $query = $this->db->query('Select  prod.name, prod.id, max(pic.path) as path, prod.public_price, prod.discount, prod.min_price, var.id as var_id
+                from product as prod left join product_variation as var on var.product_id = prod.id 
+                left join product_variation_pictures as pic on var.id = pic.product_variation_id
+                where prod.selling = true AND ( 
+                prod.sku like "%' . $search . '%" OR
+                prod.name like "%' . $search . '%" OR
+                prod.description like "%' . $search . '%"
+                ) and pic.principal
+                group by prod.id
+                order by prod.id desc limit ' . $start . ' , ' . $limit);
+            }else{
+                $query = $this->db->query('Select  prod.name, prod.id, max(pic.path) as path, prod.public_price, prod.discount, prod.min_price, var.id as var_id
+                from product as prod left join product_variation as var on var.product_id = prod.id 
+                left join product_variation_pictures as pic on var.id = pic.product_variation_id
+                where prod.selling = true AND ( 
+                prod.sku like "%' . $search . '%" OR
+                prod.name like "%' . $search . '%" OR
+                prod.description like "%' . $search . '%"
+                ) and pic.principal 
+                and prod.brand = ' .$filter. '
+                group by prod.id
+                order by prod.id desc limit ' . $start . ' , ' . $limit);
+            }
         }
         return $query->result();
     }
@@ -51,24 +74,47 @@ class Shop_model extends MY_Model
      * @return mixed
      */
 
-    public function productCount($search = false){
+    public function productCount($search = false, $filter = false){
         if(!$search) {
-            $query = $this->db->query('Select  count(prod.id) as total
-            from product as prod left join product_variation as var on var.product_id = prod.id 
-            left join product_variation_pictures as pic on var.id = pic.product_variation_id
-            where prod.selling = true
-            group by prod.id
-            ');
+            if(!$filter){
+                $query = $this->db->query('Select  count(distinct(prod.id)) as total
+                from product as prod left join product_variation as var on var.product_id = prod.id 
+                left join product_variation_pictures as pic on var.id = pic.product_variation_id
+                where prod.selling = true
+                ');
+            }else{
+                $query = $this->db->query('Select  count(distinct(prod.id)) as total
+                from product as prod left join product_variation as var on var.product_id = prod.id 
+                left join product_variation_pictures as pic on var.id = pic.product_variation_id
+                where prod.selling = true and prod.brand = ' . $filter . '
+                
+                ');
+            }
+
         }else{
-            $query = $this->db->query('Select   count(prod.id) as total
-            from product as prod left join product_variation as var on var.product_id = prod.id 
-            left join product_variation_pictures as pic on var.id = pic.product_variation_id
-            where prod.selling = true AND ( 
-            prod.sku like "%' . $search . '%" OR
-            prod.name like "%' . $search . '%" OR
-            prod.description like "%'.$search.'%"
-            )
-            group by prod.id');
+            if(!$filter){
+                $query = $this->db->query('Select   count(distinct(prod.id)) as total
+                from product as prod left join product_variation as var on var.product_id = prod.id 
+                left join product_variation_pictures as pic on var.id = pic.product_variation_id
+                where prod.selling = true AND ( 
+                prod.sku like "%' . $search . '%" OR
+                prod.name like "%' . $search . '%" OR
+                prod.description like "%'.$search.'%"
+                )
+                ');
+            }else{
+                $query = $this->db->query('Select   count(distinct(prod.id)) as total
+                from product as prod left join product_variation as var on var.product_id = prod.id 
+                left join product_variation_pictures as pic on var.id = pic.product_variation_id
+                where prod.selling = true AND ( 
+                prod.sku like "%' . $search . '%" OR
+                prod.name like "%' . $search . '%" OR
+                prod.description like "%'.$search.'%"
+                ) and prod.brand = ' . $filter . '
+               ');
+
+            }
+
 
 
         }
@@ -106,6 +152,35 @@ pic.path as path, var.name as var, brand.name as brand, brand.path as brandPath,
         ');
         return $query->result();
     }
+
+    /**
+     * @param $transaction
+     * @return bool
+     */
+
+    public function addTransaction($transaction){
+        $res= $this->db->set($transaction)
+            ->insert('transaction' , $transaction);
+        if($res){
+            return $this->db->insert_id();
+        }else
+            return false;
+    }
+
+    /**
+     * @param $transaction
+     * @return bool
+     */
+    public function addTransactionDetail($transaction){
+        $res= $this->db->set($transaction)
+            ->insert('transaction_detail' , $transaction);
+        if($res){
+            return $this->db->insert_id();
+        }else
+            return false;
+    }
+
+
 
 
 

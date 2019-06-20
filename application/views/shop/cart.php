@@ -7,14 +7,10 @@
  */
 
 ?>
-<!-- Load PayPal's checkout.js Library. -->
-<script src="https://www.paypalobjects.com/api/checkout.js" data-version-4 log-level="warn"></script>
 
-<!-- Load the client component. -->
-<script src="https://js.braintreegateway.com/web/3.44.2/js/client.min.js"></script>
-
-<!-- Load the PayPal Checkout component. -->
-<script src="https://js.braintreegateway.com/web/3.44.2/js/paypal-checkout.min.js"></script>
+<script
+        src="https://www.paypal.com/sdk/js?client-id=AVERRdwzs1J3At-KMK3yLSQKDDe4aldq8aBZXscS-XKdrpA4d7-CbBGzyb5zDwXHHR2wspTaJ08UGb4A&currency=MXN">
+</script>
 
 <!-- ========================= SECTION CONTENT ========================= -->
 <section class="section-content bg padding-y border-top">
@@ -57,7 +53,7 @@
                             </td>
                             <td>
                                 <div class="price-wrap">
-                                    <var class="price">MXN <?php $total += $item['qty'] * $item['price']; echo $total ?></var>
+                                    <var class="price">MXN <?php $total += $item['qty'] * $item['price']; echo $item['qty'] * $item['price']; ?></var>
                                     <small class="text-muted">(MXN <?= $item['price'] ?>  C/U)</small>
                                 </div> <!-- price-wrap .// -->
                             </td>
@@ -84,24 +80,63 @@
                     <dd class="text-right"><strong>MXN <?= $total ?></strong></dd>
                 </dl>
                 <hr>
-                <figure class="itemside mb-3">
-                    <aside class="aside"><img src="images/icons/pay-visa.png"></aside>
-                    <div class="text-wrap small text-muted">
-                        Pay 84.78 AED ( Save 14.97 AED )
-                        By using ADCB Cards
-                    </div>
-                </figure>
-                <figure class="itemside mb-3">
-                    <aside class="aside"> <img src="images/icons/pay-mastercard.png"> </aside>
-                    <div class="text-wrap small text-muted">
-                        Pay by MasterCard and Save 40%. <br>
-                        Lorem ipsum dolor
-                    </div>
-                </figure>
+
 
             </aside> <!-- col.// -->
+        </div>
+        <h3>Entrega</h3>
+        <?php echo form_open('shop/confirmation', "id=buyForm") ?>
+        <div class="row">
+            <div class="col-md-5"><input type="text" class="form-control" name="address1" placeholder="Dirección"></div>
+            <div class="col-md-5 offset-md-1"><input type="text" class="form-control" name="address2" placeholder="Colonia"></div>
+        </div>
+        <div class="row">
+            <div class="col-md-5"><input type="text" class="form-control" name="city" placeholder="Ciudad"></div>
+            <div class="col-md-5 offset-md-1"><input type="text" class="form-control" name="zip" placeholder="Código postal"></div>
+        </div>
+        <input type="hidden" name="paypal_email" id="paypal_mail">
+        <input type="hidden" name="name" id="name">
+        <input type="hidden" name="auth" id="auth">
+        <input type="hidden" name="total_amount" id="total_amount">
+        <?php echo form_close() ?>
+        <div class="row">
+            <div class="col-md-3 offset-md-8"><h3>Pagar:</h3><div id="paypal-button-container"></div></div>
+
         </div>
 
     </div> <!-- container .//  -->
 </section>
 <!-- ========================= SECTION CONTENT END// ========================= -->
+<script>
+
+    paypal.Buttons({
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: '<?= $total ?>',
+                        currency_code: 'MXN'
+                    }
+                }]
+            });
+        },
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                //alert('Transaction completed by ' + details.payer.name.given_name);
+                //console.log('detalles:');
+                //console.log(details);
+                document.getElementById('auth').value=details.id;
+                document.getElementById('paypal_mail').value=details.payer.email_address;
+                document.getElementById('name').value=details.payer.name.given_name + ' ' + details.payer.name.surname ;
+                document.getElementById('total_amount').value=details.purchase_units[0].amount.value;
+                document.getElementById('buyForm').submit();
+            }).then(function(details){
+                if(details.error === 'INSTRUMENT_DECLINED'){
+                    return actions.restart();
+                }
+            });
+        }
+    }).render('#paypal-button-container');
+
+
+</script>

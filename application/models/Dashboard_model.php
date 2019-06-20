@@ -158,10 +158,16 @@ class Dashboard_model extends MY_Model
      */
     public function getTransactionDetail($id, $user =  false){
         if(!$user)
-            $query = $this->db->query('Select * from transaction_detail WHERE transaction_id = '. $id);
+            $query = $this->db->query('Select p.name as name, pv.name as variant, t.quantity from transaction_detail as t left join product_variation as pv on t.product_variant = pv.id left join product as p on p.id = pv.product_id  WHERE transaction_id = '. $id);
         else
-            $query = $this->db->query('Select a.* from transaction_detail as a right_join transaction as b on b.id = a.transaction_id WHERE b.username= "'.$user .'" and a.transaction_id = '. $id);
+            $query = $this->db->query('Select a.* from transaction_detail as a right join transaction as b on b.id = a.transaction_id WHERE b.username= "'.$user .'" and a.transaction_id = '. $id);
         return $query->result();
+    }
+
+    public function updateTransaction($id, $transaction){
+
+        $this->db->where('id', $id);
+        return $this->db->update('transaction', $transaction);
     }
 
 

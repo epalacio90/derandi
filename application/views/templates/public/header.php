@@ -20,6 +20,7 @@
 
 <!-- jQuery -->
 <script src="<?php echo base_url('assets/public/js/jquery-2.0.0.min.js') ?>" type="text/javascript"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 
 <!-- Bootscss
 gulpfile.js
@@ -49,7 +50,7 @@ vendortrap4 files-->
 <!-- custom style -->
 <link href="<?php echo base_url('assets/public/css/ui.css')?>" rel="stylesheet" type="text/css"/>
 <link href="<?php echo base_url('assets/public/css/responsive.css')?>" rel="stylesheet" media="only screen and (max-width: 1200px)" />
-    <link href="<?php echo base_url('assets/public/css/style.css?v=4')?>" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo base_url('assets/public/css/style.css?v=16')?>" rel="stylesheet" type="text/css"/>
 
 <!-- custom javascript -->
 <script src="<?php echo base_url('assets/public/js/script.js')?>" type="text/javascript"></script>
@@ -73,19 +74,30 @@ $(document).ready(function() {
 
 <!-------- NAV BAR START --------->
 <nav class="navbar navbar-expand-lg navbar-dark bg-navBar">
-    <a class="navbar-brand" href="#"> <img class="logo" src="<?php echo base_url('assets/public/images/derandi/derandi_logo.png') ?>"></a>
+    <a class="navbar-brand" href="<?php echo site_url() ?>"> <img class="logo" src="<?php echo base_url('assets/public/images/derandi/derandi_logo.png') ?>"></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar1" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbar1">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Inicio<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="<?php echo site_url() ?>">Inicio</a>
             </li>
-            <li class="nav-item"><a class="nav-link" href="#"> Tienda </a></li>
-            <li class="nav-item"><a class="nav-link" href="#"> Acerca de </a></li>
+
+            <li class="nav-item active"><a class="nav-link" href="<?php echo site_url('shop') ?>"> Tienda </a></li>
+
+            <li class="nav-item dropdown show">
+                <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown" aria-expanded="true"> Acerca de </a>
+                <ul class="dropdown-menu ">
+                    <li><a class="dropdown-item" href="<?php echo site_url('home/about') ?>">Historia</a></li>
+                    <li><a class="dropdown-item" href="<?php echo site_url('home/privacy') ?>">Aviso de privacidad - Términos y condiciones</a></li>
+                </ul>
+            </li>
+            <li class="nav-item active"><a class="nav-link" href="<?php echo site_url('home/contact') ?>"> Mayoristas y distribuidores </a></li>
+            <li class="nav-item active"><a class="nav-link" href="<?php echo site_url('shop/cart') ?>"><i class="fas fa-shopping-cart"></i></a></li>
             <li class="nav-item">
-                <a class="btn ml-2 btn-primary" href="<?php echo site_url('dashboard/login') ?>">Inicio de sesión</a></li>
+                <a class="btn ml-2 btn-primary" href="<?php echo site_url('dashboard/login') ?>">Inicio de sesión</a>
+            </li>
         </ul>
     </div>
 </nav>

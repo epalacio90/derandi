@@ -27,7 +27,7 @@
 
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url('assets/private/css/sb-admin.css')?>" rel="stylesheet">
-    <link href="<?php echo base_url('assets/public/css/style.css?v=2')?>" rel="stylesheet" type="text/css"/>
+    <link href="<?php echo base_url('assets/public/css/style.css?v=10')?>" rel="stylesheet" type="text/css"/>
 
 </head>
 <body id="page-top">

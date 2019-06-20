@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <html lang="en">
 <head>
 	<meta charset="utf-8">
-	<title>Database Error</title>
+	<title>Error de consulta de base de datos</title>
 	<style type="text/css">
 
 	::selection { background-color: #f07746; color: #fff; }

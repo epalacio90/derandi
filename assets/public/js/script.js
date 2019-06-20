@@ -75,12 +75,13 @@ $(document).ready(function() {
             myOwl.owlCarousel({
                 loop: true,
                 margin: data_margin,
+                autoWidth: false,
                 nav: eval(data_nav),
                 dots: eval(data_dots),
-                autoplay: false,
+                autoplay: true,
                 items: data_items,
                 navText: ["<i class='fa fa-chevron-left'></i>", "<i class='fa fa-chevron-right'></i>"],
-                 //items: 4,
+                 //items: 29,
                 responsive: {
                     0: {
                         items: 1

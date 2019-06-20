@@ -25,12 +25,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <h4 class="card-title mb-4 mt-1">Iniciar sesión</h4>
             <?php echo form_open( $login_url ) ?>
                 <div class="form-group">
-                    <label>Email</label>
+                    <label class="float-left">Email</label>
                     <input name="login_string" class="form-control" placeholder="Email" type="email">
                 </div> <!-- form-group// -->
                 <div class="form-group">
                     <a class="float-right" href="<?php echo site_url('dashboard/recoverPass') ?>">Olvidaste tu contraseña?</a>
-                    <label>Contraseña</label>
+                    <label class="float-left">Contraseña</label>
                     <input name="login_pass" class="form-control" placeholder="******" type="password">
                 </div> <!-- form-group// -->
                 <div class="form-group">

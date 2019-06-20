@@ -6,7 +6,7 @@
  * Time: 6:23 PM
  */
 
-class Product_Model extends MY_Model
+class Product_model extends MY_Model
 {
     function __construct(){
         parent::__construct();
@@ -59,22 +59,24 @@ class Product_Model extends MY_Model
     public function countTotalProducts($warehouse = false, $search = false ){
         if(!$warehouse){
             if(!$search){
-                $query = $this->db->query('Select count(prod.id) as total from product as prod left join product_variation 
-                as var on var.product_id = prod.id left join stock on stock.product_variation_id = var.id group by prod.id  ');
+                $query = $this->db->query('Select count(distinct(prod.id)) as total from product as prod left join product_variation 
+                as var on var.product_id = prod.id left join stock on stock.product_variation_id = var.id  ');
             }else{
-                $query = $this->db->query('Select count(prod.id) as total from product as prod left join product_variation 
+                $query = $this->db->query('Select count(distinct(prod.id)) as total from product as prod left join product_variation 
                 as var on var.product_id = prod.id left join stock on stock.product_variation_id = var.id where 
                 prod.name like "%'.$search.'%" OR
                 prod.sku like "%'.$search.'%" OR
                 prod.description like "%'.$search.'%"
-                group by prod.id  ');
+                 ');
             }
 
         }else{
-            $query = $this->db->query('Select prod.*, sum(stock.quantity) from product as prod left join product_variation 
+            $query = $this->db->query('Select  count(distinct(prod.id)) as total from product as prod left join product_variation 
             as var on var.product_id = prod.id left join stock on stock.product_variation_id = var.id 
-            where stock.warehouse_id = ' . $warehouse . ' group by prod.id ');
+            where stock.warehouse_id = ' . $warehouse . ' ');
         }
+
+        return $query->result();
     }
 
     /**
@@ -113,7 +115,7 @@ class Product_Model extends MY_Model
 
     public function getProductVariant($id){
 
-        $query = $this->db->query('Select prod.*, var.name as variation, pic.path, pic.id as pic_id, var.id as variation_id from product as prod left join product_variation 
+        $query = $this->db->query('Select prod.*, var.name as variation, pic.path, pic.id as pic_id, var.id as variation_id, pic.principal as principal from product as prod left join product_variation 
         as var on var.product_id = prod.id left join product_variation_pictures as pic on pic.product_variation_id = var.id
         where var.id = ' . $id);
 
@@ -300,6 +302,15 @@ class Product_Model extends MY_Model
             WHERE product_variant_id = '.$product_variant);
         }
         return $query->result();
+    }
+
+    public function unsetAsPrincipal($variation_id){
+        $this->db->where('product_variation_id', $variation_id);
+        return $this->db->update('product_variation_pictures', array('principal'=>0));
+    }
+    public function setAsPrincipal($id){
+        $this->db->where('id', $id);
+        return $this->db->update('product_variation_pictures', array('principal'=>true));
     }
 
 
